@@ -1,32 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Syncfusion.SfSchedule.XForms;
+using System.Linq;
 
 namespace InlineCustomization
 {
-	public partial class MainPage : ContentPage
-	{
-        ScheduleAppointmentCollection appColl = new ScheduleAppointmentCollection();
-		public MainPage()
-		{
-			InitializeComponent();
-            appColl.Add(new ScheduleAppointment()
-            {
-                StartTime = DateTime.Now.Date.AddHours(10),
-                EndTime = DateTime.Now.Date.AddHours(12),
-                Subject = "Meeting",
-                Color = Color.Red
-            });
-            
+    public class ScheduleBehavior : Behavior<ContentPage>
+    {
+        SfSchedule schedule;
+        protected override void OnAttachedTo(ContentPage bindable)
+        {
+            base.OnAttachedTo(bindable);
+            schedule = bindable.FindByName<SfSchedule>("schedule");
 
             schedule.OnMonthInlineLoadedEvent += Schedule_OnMonthInlineLoadedEvent;
-            schedule.DataSource = appColl;
-
-		}
+        }
 
         private void Schedule_OnMonthInlineLoadedEvent(object sender, MonthInlineLoadedEventArgs e)
         {

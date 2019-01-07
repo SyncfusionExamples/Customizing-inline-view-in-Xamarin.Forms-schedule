@@ -4,9 +4,14 @@
              xmlns:local="clr-namespace:InlineCustomization"
              xmlns:schedule="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
              x:Class="InlineCustomization.MainPage">
+    <ContentPage.BindingContext>
+        <local:ScheduleViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Behaviors>
+        <local:ScheduleBehavior/>
+    </ContentPage.Behaviors>
     <ContentPage.Content>
-        <schedule:SfSchedule x:Name="schedule" ScheduleView="MonthView"  ShowAppointmentsInline="True">
+        <schedule:SfSchedule x:Name="schedule" ScheduleView="MonthView"  ShowAppointmentsInline="True" DataSource="{Binding Appointments}" >
         </schedule:SfSchedule>
     </ContentPage.Content>
-
 </ContentPage>
